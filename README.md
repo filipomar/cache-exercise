@@ -13,4 +13,5 @@ Just run `npm test`
 
 ## TODOs
 
-Extend test coverage on CacheWrappers
+- Use appropriate technology for the CacheWrappers
+- Extend code coverage
