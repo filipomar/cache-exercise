@@ -1,0 +1,20 @@
+{
+  "name": "cache-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpileOnly ./src/infrastructure/scripts/setup-local-http-server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "typescript": "^3.6.3"
+  }
+}
