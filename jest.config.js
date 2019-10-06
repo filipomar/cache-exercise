@@ -3,7 +3,10 @@ module.exports = {
 	roots: [
 		"<rootDir>"
 	],
-	testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts)?$",
+	transform: {
+		"^.+\\.tsx?$": "ts-jest"
+	},
+	testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$",
 	moduleFileExtensions: [
 		"ts",
 		"js",
@@ -13,7 +16,7 @@ module.exports = {
 	moduleNameMapper: {
 	},
 	collectCoverageFrom: [
-		"<rootDir>/src/**/*.{ts}"
+		"<rootDir>/src/**/*.ts"
 	],
 	coverageThreshold: {
 		"./src/": {
