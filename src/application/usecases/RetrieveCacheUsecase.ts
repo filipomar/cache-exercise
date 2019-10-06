@@ -1,7 +1,7 @@
 import { DataService } from "../services/DataService";
 import { CacheService } from "../services/CacheService";
 import { LoggingService } from "../services/LoggingService";
-import { CacheParameters } from "../../model/CacheParameters";
+import { CacheRetrievalParameters } from "../../model/CacheParameters";
 
 export class RetrieveCacheUsecase {
 	private readonly cacheService: CacheService;
@@ -14,7 +14,7 @@ export class RetrieveCacheUsecase {
 		this.loggingService = loggingService;
 	}
 
-	public async invoke({ cacheKey }: CacheParameters): Promise<string> {
+	public async invoke({ cacheKey }: CacheRetrievalParameters): Promise<string> {
 		let data: string | null = await this.cacheService.getCache(cacheKey);
 		if (data === null) {
 			this.loggingService.info("Cache miss");

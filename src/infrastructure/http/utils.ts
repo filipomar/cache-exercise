@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { validationResult, body as bodyValidator } from 'express-validator';
+import { validationResult, query as queryValidator, body as bodyValidator } from 'express-validator';
 
 import { GenericError } from '../../model/Error';
 
@@ -43,7 +43,8 @@ export const handleErrors = (controller: (req: Request, res: Response) => Promis
 		}
 	});
 
+export const body = <T extends string | string[] | undefined>(fields?: T, message?: any) =>
+	bodyValidator(fields, message);
 
-export const body = <T extends string | string[] | undefined>(fields?: T, message?: any) => {
-	return bodyValidator(fields, message);
-};
+export const query = <T extends string | string[] | undefined>(fields?: T, message?: any) =>
+	queryValidator(fields, message);
