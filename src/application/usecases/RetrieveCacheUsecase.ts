@@ -21,7 +21,7 @@ export class RetrieveCacheUsecase {
 			data = await this.dataService.fetch(cacheKey);
 			await this.cacheService.setCache(cacheKey, data);
 		} else {
-			this.loggingService.info("Cache hit”");
+			this.loggingService.info("Cache hit");
 		}
 
 		return data;
