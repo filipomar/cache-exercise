@@ -13,7 +13,10 @@ export class MockedLimitedCacheServiceWrapper implements CacheService {
 		this.cacheService = cacheService;
 	}
 
-	private async addTopKey(cacheKey: string) {
+	/**
+	 * Adds the current cache key as the most recent used key
+	 */
+	private async addAsTopKey(cacheKey: string) {
 		if (!this.maxSize) {
 			return;
 		}
@@ -28,6 +31,9 @@ export class MockedLimitedCacheServiceWrapper implements CacheService {
 		removedTopKeys.forEach((key) => this.cacheService.deleteCache(key));
 	}
 
+	/**
+	 * Key is no longer relevent
+	 */
 	private async removeTopKey(cacheKey: string | null) {
 		if (!this.maxSize) {
 			return;
@@ -53,14 +59,14 @@ export class MockedLimitedCacheServiceWrapper implements CacheService {
 
 	public async setCache(cacheKey: string, data: string): Promise<void> {
 		await this.cacheService.setCache(cacheKey, data);
-		this.addTopKey(cacheKey);
+		this.addAsTopKey(cacheKey);
 	}
 
 	public async getCache(cacheKey: string): Promise<string | null> {
 		const value = await this.cacheService.getCache(cacheKey);
 
 		if (value !== null) {
-			this.addTopKey(cacheKey);
+			this.addAsTopKey(cacheKey);
 		}
 
 		return value;

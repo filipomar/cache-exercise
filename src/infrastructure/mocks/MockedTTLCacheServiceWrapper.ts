@@ -1,6 +1,14 @@
 import { CacheService } from "../../application/services/CacheService";
 import { Configuration } from "../../application/services/Configuration";
 
+/**
+ * This wrapper could have been implemented just as easily [if not easier] with a tuple containing the value and a vailidyTimeStamp of the value
+ * In that case cache would be missed if the timestamp is older than the request time
+ * 
+ * I decided against that in order to get rid of information as soon as it is gets old in order to "free memory" as soon as possible
+ * 
+ * Regardless, one should never use these approaches IRL :)
+ */
 export class MockedTTLCacheServiceWrapper implements CacheService {
 	private readonly cacheService: CacheService;
 
