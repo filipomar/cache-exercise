@@ -1,9 +1,10 @@
-import { MockedCacheService } from "../../../src/infrastructure/mocks/MockedCacheService";
-
 import { RetrieveCacheKeysUsecase } from "../../../src/application/usecases/RetrieveCacheKeysUsecase";
 
+import { MockedLimitedCacheService } from "../../../src/infrastructure/mocks/MockedLimitedCacheService";
+import { EnvFileConfiguration } from "../../../src/infrastructure/services/EnvFileConfiguration";
+
 test('Validate that adding cached objects results in more keys', async () => {
-	const cacheService = new MockedCacheService();
+	const cacheService = new MockedLimitedCacheService(new EnvFileConfiguration());
 	const usecase = new RetrieveCacheKeysUsecase(cacheService);
 	expect(await await usecase.invoke()).toStrictEqual([]);
 	await cacheService.setCache('KEY', 'VALUE');
@@ -11,7 +12,7 @@ test('Validate that adding cached objects results in more keys', async () => {
 });
 
 test('Validate that keys are colliding', async () => {
-	const cacheService = new MockedCacheService();
+	const cacheService = new MockedLimitedCacheService(new EnvFileConfiguration());
 	const usecase = new RetrieveCacheKeysUsecase(cacheService);
 	expect(await await usecase.invoke()).toStrictEqual([]);
 	await cacheService.setCache('KEY', 'VALUE');
