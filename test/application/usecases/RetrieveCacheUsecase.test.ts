@@ -51,8 +51,6 @@ test('Validate that when the cache is missed, the data service, log services are
 	expect(logger.mock.calls[0][0]).toStrictEqual('Cache miss');
 });
 
-
-
 test('Validate that when the cache is hit, the log service is being called and cache is not being set', async () => {
 	const dataFetcher = jest.fn().mockImplementation(() => Promise.resolve('CACHE_VALUE'));
 	const cacheClearer = jest.fn().mockImplementation(() => Promise.resolve());
