@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "start": "ts-node-dev --respawn --transpileOnly ./src/infrastructure/scripts/setup-local-http-server.ts",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
