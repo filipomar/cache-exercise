@@ -1,6 +1,6 @@
 import { AppFactory } from "../http/AppFactory";
 
-const appFactory = new AppFactory();
+const appFactory = new AppFactory({}, {}, {});
 const app = appFactory.create();
 
 const port = 3000;
