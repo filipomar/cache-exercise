@@ -2,10 +2,13 @@ import express, { Application, Request, Response } from 'express';
 import { json } from 'body-parser';
 
 import { handleErrors, whenValidated, body } from './utils';
+
 import { CacheParameters } from '../../model/CacheParameters';
+
 import { DataService } from '../../application/services/DataService';
 import { CacheService } from '../../application/services/CacheService';
 import { LoggingService } from '../../application/services/LoggingService';
+
 import { RetrieveCacheUsecase } from '../../application/usecases/RetrieveCacheUsecase';
 
 export class AppFactory {

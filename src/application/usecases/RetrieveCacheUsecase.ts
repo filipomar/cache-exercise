@@ -4,11 +4,26 @@ import { LoggingService } from "../services/LoggingService";
 import { CacheParameters } from "../../model/CacheParameters";
 
 export class RetrieveCacheUsecase {
-	public constructor(dataService: DataService, cacheService: CacheService, loggingService: LoggingService) {
+	private readonly cacheService: CacheService;
+	private readonly loggingService: LoggingService;
+	private readonly dataService: DataService;
 
+	public constructor(dataService: DataService, cacheService: CacheService, loggingService: LoggingService) {
+		this.dataService = dataService;
+		this.cacheService = cacheService;
+		this.loggingService = loggingService;
 	}
 
-	public async invoke(body: CacheParameters): Promise<string> {
-		throw new Error("Method not implemented.");
+	public async invoke({ cacheKey }: CacheParameters): Promise<string> {
+		let data: string | null = await this.cacheService.getCache(cacheKey);
+		if (data === null) {
+			this.loggingService.info("Cache miss");
+			data = await this.dataService.fetch(cacheKey);
+			await this.cacheService.setCache(cacheKey, data);
+		} else {
+			this.loggingService.info("Cache hit”");
+		}
+
+		return data;
 	}
 }
