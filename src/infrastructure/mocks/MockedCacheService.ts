@@ -12,5 +12,7 @@ export class MockedCacheService implements CacheService {
 		return this.cache.get(cacheKey) || null;
 	}
 
-
+	public async getCacheKeys(): Promise<string[]> {
+		return Array.from(this.cache.keys());
+	}
 }
