@@ -1,7 +1,7 @@
 import { CacheService } from "../../application/services/CacheService";
 import { Configuration } from "../../application/services/Configuration";
 
-export class MockedLimitedCacheService implements CacheService {
+export class MockedCacheService implements CacheService {
 	private readonly cache = new Map<string, string>();
 
 	// Limited functionality

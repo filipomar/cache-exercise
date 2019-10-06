@@ -6,13 +6,13 @@ import { LoggingService } from "../../application/services/LoggingService";
 import { Configuration } from "../../application/services/Configuration";
 
 import { MockedDataService } from "../mocks/MockedDataService";
-import { MockedLimitedCacheService } from "../mocks/MockedLimitedCacheService";
+import { MockedCacheService } from "../mocks/MockedCacheService";
 import { MockedLoggingService } from "../mocks/MockedLoggingService";
 import { EnvFileConfiguration } from "../services/EnvFileConfiguration";
 
 const configuration: Configuration = new EnvFileConfiguration();
 const dataService: DataService = new MockedDataService();
-const cacheService: CacheService = new MockedLimitedCacheService(configuration);
+const cacheService: CacheService = new MockedCacheService(configuration);
 const loggingService: LoggingService = new MockedLoggingService();
 
 const appFactory = new AppFactory(dataService, cacheService, loggingService);
