@@ -13,18 +13,21 @@ import { RetrieveCacheUsecase } from '../../application/usecases/RetrieveCacheUs
 import { RetrieveCachekeysUsecase } from '../../application/usecases/RetrieveCachekeysUsecase';
 import { UpdateCacheUsecase } from '../../application/usecases/UpdateCacheUsecase';
 import { RemoveCacheUsecase } from '../../application/usecases/RemoveCacheUsecase';
+import { RemoveWholeCacheUsecase } from '../../application/usecases/RemoveWholeCacheUsecase';
 
 export class AppFactory {
 	private readonly retrieveCacheUsecase: RetrieveCacheUsecase;
 	private readonly retrieveCachekeysUsecase: RetrieveCachekeysUsecase;
 	private readonly updateCacheUsecase: UpdateCacheUsecase;
 	private readonly removeCacheUsecase: RemoveCacheUsecase;
+	private readonly removeWholeCacheUsecase: RemoveWholeCacheUsecase;
 
 	public constructor(dataService: DataService, cacheService: CacheService, loggingService: LoggingService) {
 		this.retrieveCacheUsecase = new RetrieveCacheUsecase(dataService, cacheService, loggingService);
 		this.retrieveCachekeysUsecase = new RetrieveCachekeysUsecase(cacheService);
 		this.updateCacheUsecase = new UpdateCacheUsecase(cacheService);
 		this.removeCacheUsecase = new RemoveCacheUsecase(cacheService);
+		this.removeWholeCacheUsecase = new RemoveWholeCacheUsecase(cacheService);
 	}
 
 	public create(): Application {
@@ -59,6 +62,13 @@ export class AppFactory {
 				body<keyof CacheRemovalParameters>('cacheKey').isString().withMessage(`be a string`),
 				handleErrors(whenValidated(async ({ body }: Request, res: Response): Promise<void> => {
 					await this.removeCacheUsecase.invoke(body as CacheRemovalParameters);
+					res.status(200).end();
+				})));
+
+		app
+			.delete('/cache/all',
+				handleErrors(whenValidated(async (req: Request, res: Response): Promise<void> => {
+					await this.removeWholeCacheUsecase.invoke();
 					res.status(200).end();
 				})));
 

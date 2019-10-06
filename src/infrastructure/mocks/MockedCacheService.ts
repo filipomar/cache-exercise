@@ -1,7 +1,6 @@
 import { CacheService } from "../../application/services/CacheService";
 
 export class MockedCacheService implements CacheService {
-
 	private cache = new Map<string, string>();
 
 	public async setCache(cacheKey: string, data: string): Promise<void> {
@@ -18,5 +17,9 @@ export class MockedCacheService implements CacheService {
 
 	public async deleteCache(cacheKey: string): Promise<void> {
 		this.cache.delete(cacheKey);
+	}
+
+	public async clearCache(): Promise<void> {
+		this.cache.clear();
 	}
 }
