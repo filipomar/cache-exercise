@@ -3,17 +3,19 @@ import { AppFactory } from "../http/AppFactory";
 import { DataService } from "../../application/services/DataService";
 import { CacheService } from "../../application/services/CacheService";
 import { LoggingService } from "../../application/services/LoggingService";
+import { Configuration } from "../../application/services/Configuration";
 
 import { MockedDataService } from "../mocks/MockedDataService";
 import { MockedLimitedCacheService } from "../mocks/MockedLimitedCacheService";
 import { MockedLoggingService } from "../mocks/MockedLoggingService";
+import { EnvFileConfiguration } from "../services/EnvFileConfiguration";
 
+const configuration: Configuration = new EnvFileConfiguration();
 const dataService: DataService = new MockedDataService();
-const cacheService: CacheService = new MockedLimitedCacheService();
+const cacheService: CacheService = new MockedLimitedCacheService(configuration);
 const loggingService: LoggingService = new MockedLoggingService();
 
 const appFactory = new AppFactory(dataService, cacheService, loggingService);
 const app = appFactory.create();
 
-const port = 3000;
-app.listen(port, (): void => console.log(`Listing on port ${port}`));
+app.listen(configuration.getPort(), (): void => console.log(`Listing on port ${configuration.getPort()}`));

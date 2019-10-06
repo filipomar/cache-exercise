@@ -1,4 +1,5 @@
 import { CacheService } from "../../application/services/CacheService";
+import { Configuration } from "../../application/services/Configuration";
 
 export class MockedLimitedCacheService implements CacheService {
 	private readonly cache = new Map<string, string>();
@@ -7,8 +8,8 @@ export class MockedLimitedCacheService implements CacheService {
 	private readonly maxSize: number;
 	private readonly topKeys: string[] = [];
 
-	constructor(maxSize: number = 3) {
-		this.maxSize = maxSize;
+	constructor(configuration: Configuration) {
+		this.maxSize = configuration.getCacheMaxSize();
 	}
 
 	private async addTopKey(cacheKey: string) {
