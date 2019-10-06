@@ -5,11 +5,11 @@ import { CacheService } from "../../application/services/CacheService";
 import { LoggingService } from "../../application/services/LoggingService";
 
 import { MockedDataService } from "../mocks/MockedDataService";
-import { MockedCacheService } from "../mocks/MockedCacheService";
+import { MockedLimitedCacheService } from "../mocks/MockedLimitedCacheService";
 import { MockedLoggingService } from "../mocks/MockedLoggingService";
 
 const dataService: DataService = new MockedDataService();
-const cacheService: CacheService = new MockedCacheService();
+const cacheService: CacheService = new MockedLimitedCacheService();
 const loggingService: LoggingService = new MockedLoggingService();
 
 const appFactory = new AppFactory(dataService, cacheService, loggingService);
