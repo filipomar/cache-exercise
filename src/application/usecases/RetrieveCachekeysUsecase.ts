@@ -1,6 +1,6 @@
 import { CacheService } from "../services/CacheService";
 
-export class RetrieveCachekeysUsecase {
+export class RetrieveCacheKeysUsecase {
 	private readonly cacheService: CacheService;
 
 	public constructor(cacheService: CacheService) {

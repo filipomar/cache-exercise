@@ -10,21 +10,21 @@ import { CacheService } from '../../application/services/CacheService';
 import { LoggingService } from '../../application/services/LoggingService';
 
 import { RetrieveCacheUsecase } from '../../application/usecases/RetrieveCacheUsecase';
-import { RetrieveCachekeysUsecase } from '../../application/usecases/RetrieveCachekeysUsecase';
+import { RetrieveCacheKeysUsecase } from '../../application/usecases/RetrieveCacheKeysUsecase';
 import { UpdateCacheUsecase } from '../../application/usecases/UpdateCacheUsecase';
 import { RemoveCacheUsecase } from '../../application/usecases/RemoveCacheUsecase';
 import { RemoveWholeCacheUsecase } from '../../application/usecases/RemoveWholeCacheUsecase';
 
 export class AppFactory {
 	private readonly retrieveCacheUsecase: RetrieveCacheUsecase;
-	private readonly retrieveCachekeysUsecase: RetrieveCachekeysUsecase;
+	private readonly retrieveCachekeysUsecase: RetrieveCacheKeysUsecase;
 	private readonly updateCacheUsecase: UpdateCacheUsecase;
 	private readonly removeCacheUsecase: RemoveCacheUsecase;
 	private readonly removeWholeCacheUsecase: RemoveWholeCacheUsecase;
 
 	public constructor(dataService: DataService, cacheService: CacheService, loggingService: LoggingService) {
 		this.retrieveCacheUsecase = new RetrieveCacheUsecase(dataService, cacheService, loggingService);
-		this.retrieveCachekeysUsecase = new RetrieveCachekeysUsecase(cacheService);
+		this.retrieveCachekeysUsecase = new RetrieveCacheKeysUsecase(cacheService);
 		this.updateCacheUsecase = new UpdateCacheUsecase(cacheService);
 		this.removeCacheUsecase = new RemoveCacheUsecase(cacheService);
 		this.removeWholeCacheUsecase = new RemoveWholeCacheUsecase(cacheService);
