@@ -10,6 +10,9 @@ A simple exercise on a mongo db cache implementation
 
 Just run `npm test`
 
+## Run
+
+Just run `npm start` to run your the webserver on your local machine [it relies on the .env file mongodb config]
 
 ## TODOs
 
