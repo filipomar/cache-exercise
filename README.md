@@ -9,3 +9,8 @@ A simple exercise on a mongo db cache implementation
 ## Test
 
 Just run `npm test`
+
+
+## TODOs
+
+Extend test coverage on CacheWrappers

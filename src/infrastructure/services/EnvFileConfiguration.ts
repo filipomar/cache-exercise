@@ -18,4 +18,12 @@ export class EnvFileConfiguration implements Configuration {
 	getTimeToLeave(): number {
 		return Number(process.env.CACHE_TTL);
 	}
+
+	getMongoConnectionUrl(): string {
+		return String(process.env.MONGO_CONNECTION_URL);
+	}
+
+	getMongoDatabaseName(): string {
+		return String(process.env.MONGO_DATABASE_NAME);
+	}
 }
