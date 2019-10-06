@@ -8,11 +8,14 @@ import { Configuration } from "../../application/services/Configuration";
 import { MockedDataService } from "../mocks/MockedDataService";
 import { MockedCacheService } from "../mocks/MockedCacheService";
 import { MockedLoggingService } from "../mocks/MockedLoggingService";
+import { MockedLimitedCacheServiceWrapper } from "../mocks/MockedLimitedCacheServiceWrapper";
+import { MockedTTLCacheServiceWrapper } from "../mocks/MockedTTLCacheServiceWrapper";
 import { EnvFileConfiguration } from "../services/EnvFileConfiguration";
 
 const configuration: Configuration = new EnvFileConfiguration();
 const dataService: DataService = new MockedDataService();
-const cacheService: CacheService = new MockedCacheService(configuration);
+
+const cacheService: CacheService = new MockedTTLCacheServiceWrapper(configuration, new MockedLimitedCacheServiceWrapper(configuration, new MockedCacheService()));
 const loggingService: LoggingService = new MockedLoggingService();
 
 const appFactory = new AppFactory(dataService, cacheService, loggingService);

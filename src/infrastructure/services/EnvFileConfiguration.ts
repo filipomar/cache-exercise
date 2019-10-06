@@ -14,4 +14,8 @@ export class EnvFileConfiguration implements Configuration {
 	getCacheMaxSize(): number {
 		return Number(process.env.CACHE_MAX_SIZE);
 	}
+
+	getTimeToLeave(): number {
+		return Number(process.env.CACHE_TTL);
+	}
 }
