@@ -15,4 +15,8 @@ export class MockedCacheService implements CacheService {
 	public async getCacheKeys(): Promise<string[]> {
 		return Array.from(this.cache.keys());
 	}
+
+	public async deleteCache(cacheKey: string): Promise<void> {
+		this.cache.delete(cacheKey);
+	}
 }

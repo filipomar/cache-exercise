@@ -1,7 +1,12 @@
-export interface CacheRetrievalParameters {
+type CacheKey = {
 	readonly cacheKey: string;
-}
+};
 
-export interface CacheUpdateParameters extends CacheRetrievalParameters {
+type CacheValue = {
 	readonly cacheValue: string;
-}
+};
+
+
+export type CacheRetrievalParameters = CacheKey;
+export type CacheRemovalParameters = CacheKey;
+export type CacheUpdateParameters = CacheKey & CacheValue;
